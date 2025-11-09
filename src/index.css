@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}
+@plugin "daisyui/theme" {
+  --color-primary: #d90429;
+  --color-base: #ffffff;
+  --color-contrast: #222222;
+  --color-accent: #0c3d54;
+  --color-accent--variation: hsl(199, 75%, 28.5%);
+  --color-border--variation: hsl(0, 0%, 91%);
+}
+
+@layer utilities {
+  .font-primary {
+    font-family: "Montserrat", sans-serif;
+  }
+  .font-secondary {
+    font-family: "Lato", sans-serif;
+  }
+}
