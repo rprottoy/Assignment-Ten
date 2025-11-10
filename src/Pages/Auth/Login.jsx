@@ -64,7 +64,7 @@ const Login = () => {
                       Forgot password?
                     </a>
                   </div>
-                  <button className="btn border-none font-primary text-white rounded-none font-semibold mt-4 bg-[rgb(125,1,37)] hover:bg-[#222222]">
+                  <button className="btn border-none font-primary text-white rounded-none font-semibold mt-4 bg-[#D01818] hover:bg-[#222222]">
                     LOGIN
                   </button>
                 </fieldset>
@@ -106,7 +106,7 @@ const Login = () => {
                 <p>
                   Don't have an account?{" "}
                   <Link to="/registration">
-                    <span className="text-[#7D0125]">Register Now</span>
+                    <span className="text-[#D01818]">Register Now</span>
                   </Link>
                 </p>
               </div>

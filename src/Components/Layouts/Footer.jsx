@@ -88,7 +88,7 @@ const Footer = () => {
                 placeholder="example@email.com"
                 className="input input-bordered join-item font-secondary"
               />
-              <button className="btn border-[#7D0125] border-2 join-item font-primary bg-[#7D0125] hover:bg-[#222222] hover:border-[#222222] text-white shadow-none">
+              <button className="btn border-[#D01818] border-2 join-item font-primary bg-[#D01818] hover:bg-[#222222] hover:border-[#222222] text-white shadow-none">
                 SUBSCRIBE
               </button>
             </div>

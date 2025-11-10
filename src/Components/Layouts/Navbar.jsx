@@ -104,7 +104,7 @@ const Navbar = () => {
                   <li>
                     <button
                       onClick={handleSignOut}
-                      className="px-10 py-3 bg-[#7D0125] text-white font-semibold border-0 hover:bg-[#253241] text-center rounded-none "
+                      className="px-10 py-3 bg-[#D01818] text-white font-semibold border-0 hover:bg-[#253241] text-center rounded-none "
                     >
                       LOG OUT
                     </button>
@@ -118,7 +118,7 @@ const Navbar = () => {
               ""
             ) : (
               <Link to="/login">
-                <button className="px-10 py-3 bg-[#7D0125] text-white font-semibold border-0 hover:bg-[#253241]">
+                <button className="px-10 py-3 bg-[#D01818] text-white font-semibold border-0 hover:bg-[#253241]">
                   LOGIN
                 </button>
               </Link>

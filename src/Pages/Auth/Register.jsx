@@ -113,7 +113,7 @@ const Register = () => {
                     placeholder="Password"
                   />
 
-                  <button className="btn border-none font-primary text-white rounded-none font-semibold mt-4 bg-[rgb(125,1,37)] hover:bg-[#222222] ">
+                  <button className="btn border-none font-primary text-white rounded-none font-semibold mt-4 bg-[#D01818] hover:bg-[#222222] ">
                     REGISTER
                   </button>
                 </fieldset>
@@ -155,7 +155,7 @@ const Register = () => {
                 <p>
                   Already have an account?{" "}
                   <Link to="/login">
-                    <span className="text-[#7D0125]">Login Now</span>
+                    <span className="text-[#D01818]">Login Now</span>
                   </Link>
                 </p>
               </div>
