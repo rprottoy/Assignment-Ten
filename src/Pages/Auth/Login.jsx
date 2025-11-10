@@ -1,7 +1,45 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { use, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const [error, setError] = useState("");
+  const { signInUser, signInWithGoogle } = use(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    setError("");
+
+    signInUser(email, password)
+      .then(() => {
+        e.target.reset();
+        navigate(location.state || "/");
+      })
+      .catch((error) => {
+        setError(
+          error.Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Password must be at least 6 characters and must contain one Uppercase and one lowercase!",
+            footer: '<a href="#">Why do I have this issue?</a>',
+          })
+        );
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle().then(() => {});
+    navigate(location.state || "/").catch((error) => {
+      console.log(error);
+    });
+  };
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -11,7 +49,7 @@ const Login = () => {
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
-              <form>
+              <form onSubmit={handleLogin}>
                 <fieldset className="fieldset">
                   <label className="label font-secondary">Email</label>
                   <input type="email" className="input" placeholder="Email" />
@@ -31,7 +69,10 @@ const Login = () => {
                   </button>
                 </fieldset>
               </form>
-              <button className="btn bg-white text-black border-[#e5e5e5] rounded-none">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn bg-white text-black border-[#e5e5e5] rounded-none"
+              >
                 <svg
                   aria-label="Google logo"
                   width="16"

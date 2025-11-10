@@ -1,7 +1,72 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { use, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const { createUser, updateUser, setUser, signInWithGoogle } =
+    use(AuthContext);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    const name = e.target.name.value;
+    const photo = e.target.photo.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordPattern.test(password)) {
+      setError(
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Password must be at least 6 characters and must contain one Uppercase and one lowercase!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        })
+      );
+      return;
+    }
+
+    setError("");
+
+    createUser(email, password)
+      .then((res) => {
+        const user = res.user;
+        updateUser({ displayName: name, photoURL: photo }).then(() => {
+          setUser({
+            ...user,
+            displayName: name,
+            photoURL: photo,
+          }).catch((error) => {
+            console.log(error);
+            setUser(user);
+          });
+          navigate(location.state || "/");
+        });
+      })
+      .catch((error) => {
+        setError(
+          error.Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Password must be at least 6 characters and must contain one Uppercase and one lowercase!",
+            footer: '<a href="#">Why do I have this issue?</a>',
+          })
+        );
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle().then(() => {});
+    navigate(location.state || "/").catch((error) => {
+      console.log(error);
+    });
+  };
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -13,7 +78,7 @@ const Register = () => {
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
-              <form>
+              <form onSubmit={handleRegister}>
                 <fieldset className="fieldset">
                   {/* Name */}
                   <label className="label font-secondary">Name</label>
@@ -53,7 +118,10 @@ const Register = () => {
                   </button>
                 </fieldset>
               </form>
-              <button className="btn bg-white text-black border-[#e5e5e5] rounded-none">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn bg-white text-black border-[#e5e5e5] rounded-none"
+              >
                 <svg
                   aria-label="Google logo"
                   width="16"

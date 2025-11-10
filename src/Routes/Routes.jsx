@@ -7,6 +7,7 @@ import Register from "../Pages/Auth/Register";
 import AddCar from "../Pages/AddCar/AddCar";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import MyListings from "../Pages/MyListings/MyListings";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -32,15 +33,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/addCar",
-        element: <AddCar></AddCar>,
+        element: (
+          <PrivateRoute>
+            <AddCar></AddCar>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myBookings",
-        element: <MyBookings></MyBookings>,
+        element: (
+          <PrivateRoute>
+            <MyBookings></MyBookings>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myListings",
-        element: <MyListings></MyListings>,
+        element: (
+          <PrivateRoute>
+            <MyListings></MyListings>
+          </PrivateRoute>
+        ),
       },
     ],
   },

@@ -1,8 +1,18 @@
-import React from "react";
+import React, { use } from "react";
 import logo from "../../Assets/logo1.png";
 import { Link } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Navbar = () => {
+  const { user, signOutUser } = use(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const links = (
     <>
       <li>
@@ -11,7 +21,7 @@ const Navbar = () => {
       <li>
         <Link to="/browseCars">BROWSE CARS</Link>
       </li>
-      {
+      {user && (
         <>
           <li>
             <Link to="/addCar">ADD CAR</Link>
@@ -23,7 +33,7 @@ const Navbar = () => {
             <Link to="/myBookings">MY BOOKINGS</Link>
           </li>
         </>
-      }
+      )}
     </>
   );
   return (
@@ -67,11 +77,48 @@ const Navbar = () => {
           <ul className="menu   menu-horizontal px-1 font-semibold">{links}</ul>
         </div>
         <div className="navbar-end px-10">
-          <Link to="/login">
-            <button className="px-10 py-3 bg-[#7D0125] text-white font-semibold border-0 hover:bg-[#253241]">
-              LOGIN
-            </button>
-          </Link>
+          {user && (
+            <div className="font-secondary mr-4">
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className=" m-1">
+                  <img
+                    className="rounded-full w-8"
+                    src={user.photoURL}
+                    alt="User's photo"
+                  />
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                >
+                  <li>
+                    <button
+                      onClick={handleSignOut}
+                      className="text-primary hover:text-secondary font-extrabold text-xl"
+                    >
+                      Sign Out
+                    </button>
+                  </li>
+                  <li>
+                    <a className="font-semibold text-[18px]">
+                      {user.displayName}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+          <div>
+            {user ? (
+              ""
+            ) : (
+              <Link to="/login">
+                <button className="px-10 py-3 bg-[#7D0125] text-white font-semibold border-0 hover:bg-[#253241]">
+                  LOGIN
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
