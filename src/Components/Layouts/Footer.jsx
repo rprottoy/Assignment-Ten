@@ -3,6 +3,10 @@ import logo from "../../Assets/logo1.png";
 import location from "../../Assets/location.png";
 import message from "../../Assets/message.png";
 import support from "../../Assets/support.png";
+import facebook from "../../Assets/icons8-facebook-50.png";
+import instagram from "../../Assets/icons8-instagram-50.png";
+import x from "../../Assets/icons8-x-50.png";
+import youtube from "../../Assets/icons8-youtube-50.png";
 import { Link } from "react-router";
 
 const Footer = () => {
@@ -90,6 +94,28 @@ const Footer = () => {
             </div>
           </fieldset>
         </form>
+        {/* Social Links */}
+        <div>
+          <nav className="space-y-3">
+            <h6 className=" font-semibold text-lg font-primary text-white">
+              Social
+            </h6>
+            <div className="grid grid-flow-col gap-4">
+              <a>
+                <img className="w-6" src={facebook} alt="Facebook Icon" />
+              </a>
+              <a>
+                <img className="w-6" src={instagram} alt="Instagram Icon" />
+              </a>
+              <a>
+                <img className="w-6" src={x} alt="X Icon" />
+              </a>
+              <a>
+                <img className="w-6" src={youtube} alt="Youtube Icon" />
+              </a>
+            </div>
+          </nav>
+        </div>
       </div>
       {/* Copyright */}
       <div className="footer sm:footer-horizontal footer-center bg-[#253241] text-base-content p-4 border-t-2 border-gray-600">

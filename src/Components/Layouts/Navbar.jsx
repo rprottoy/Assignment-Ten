@@ -78,7 +78,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end px-10">
           {user && (
-            <div className="font-secondary mr-4">
+            <div className="font-primary mr-4">
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className=" m-1">
                   <img
@@ -89,20 +89,25 @@ const Navbar = () => {
                 </div>
                 <ul
                   tabIndex="-1"
-                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-62 p-3 shadow-md space-y-2"
                 >
+                  <li>
+                    <h4 className="font-semibold text-[18px] font-primary">
+                      {user.displayName}
+                    </h4>
+                  </li>
+                  <li>
+                    <a className="font-semibold text-[18px] font-primary">
+                      {user.email}
+                    </a>
+                  </li>
                   <li>
                     <button
                       onClick={handleSignOut}
-                      className="text-primary hover:text-secondary font-extrabold text-xl"
+                      className="px-10 py-3 bg-[#7D0125] text-white font-semibold border-0 hover:bg-[#253241] text-center rounded-none "
                     >
-                      Sign Out
+                      LOG OUT
                     </button>
-                  </li>
-                  <li>
-                    <a className="font-semibold text-[18px]">
-                      {user.displayName}
-                    </a>
                   </li>
                 </ul>
               </div>
