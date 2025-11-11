@@ -1,10 +1,11 @@
 import React, { use } from "react";
 import logo from "../../Assets/logo1.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     signOutUser()
@@ -12,6 +13,7 @@ const Navbar = () => {
       .catch((error) => {
         console.log(error);
       });
+    navigate("/");
   };
   const links = (
     <>
@@ -91,7 +93,7 @@ const Navbar = () => {
                 </div>
                 <ul
                   tabIndex="-1"
-                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-62 p-3 shadow-md space-y-2"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-70 p-3 shadow-md space-y-2"
                 >
                   <li>
                     <h4 className="font-semibold text-[18px] font-primary">
@@ -106,7 +108,7 @@ const Navbar = () => {
                   <li>
                     <button
                       onClick={handleSignOut}
-                      className="px-10 py-3 bg-[#D01818] text-white font-semibold border-0 hover:bg-[#253241] text-center rounded-none "
+                      className="px-10 py-3 w-full bg-[#D01818] text-white font-semibold border-0 hover:bg-[#253241] text-center rounded-none "
                     >
                       LOG OUT
                     </button>
