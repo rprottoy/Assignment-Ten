@@ -1,6 +1,8 @@
-import React from "react";
+import React, { use } from "react";
 
-const CarCard = () => {
+const CarCard = ({ featuredCarsPromise }) => {
+  const featuredCars = use(featuredCarsPromise);
+  console.log(featuredCars);
   return (
     <div className="w-full bg-[#253241]">
       <div className="max-w-10/12 mx-auto ">
