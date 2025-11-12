@@ -1,18 +1,36 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 const AddCar = () => {
+  const { user } = use(AuthContext);
   // Form
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    const carName = e.target.carName.value;
-    const category = e.target.category.value;
-    const rentPrice = e.target.rentPrice.value;
-    const imageUrl = e.target.imageUrl.value;
-    const location = e.target.location.value;
-    const providerName = e.target.providerName.value;
-    const providerEmail = e.target.providerEmail.value;
-    const description = e.target.description.value;
+    const formData = {
+      carName: e.target.carName.value,
+      category: e.target.category.value,
+      rentPrice: e.target.rentPrice.value,
+      imageUrl: e.target.imageUrl.value,
+      location: e.target.location.value,
+      providerName: e.target.providerName.value,
+      providerEmail: e.target.providerEmail.value,
+      description: e.target.description.value,
+    };
+    fetch("http://localhost:3000/browseCars", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="mt-30  md:max-w-10/12 w-11/12 mx-auto mb-15">
@@ -73,7 +91,7 @@ const AddCar = () => {
               <label>Provider's Name</label>
               <input
                 type="text"
-                readOnly
+                // readOnly
                 name="providerName"
                 placeholder="Your/Company Name"
                 required
@@ -109,7 +127,7 @@ const AddCar = () => {
               name="providerEmail"
               placeholder="Your/Company Email"
               required
-              readOnly
+              // readOnly
               className="px-3 py-2 mt-1 border borderColor rounded-md outline-none"
             />
           </div>
