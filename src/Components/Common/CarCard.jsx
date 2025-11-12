@@ -28,12 +28,18 @@ const CarCard = ({ featuredCarsPromise }) => {
               className="overflow-hidden hover:-translate-y-1  transition-all duration-500 cursor-pointer md:w-[380px] w-full h-fit mb-10"
             >
               {/* image div */}
-              <div>
+              <div className="overflow-hidden relative">
                 <img
-                  className="  object-center object-cover transition-transform duration-500 group-hover:scale-105 md:w-[380px] w-full h-[300px]"
+                  className="  object-center object-cover transition-transform duration-500 group-hover:scale-105 md:w-[380px] w-full h-[300px] hover:brightness-50"
                   src={car?.imageUrl}
-                  alt=""
+                  alt="Car Image"
                 />
+
+                {/* {car?.isAvailable && ( */}
+                <p className="absolute top-4 left-4 px-3 py-1 rounded-full text-white bg-[#D01818] font-bold">
+                  Available
+                </p>
+                {/* )} */}
               </div>
               <div className="bg-[#253241] hover:bg-[#D01818]">
                 {/* Name div */}

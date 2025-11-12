@@ -9,6 +9,7 @@ import MyBookings from "../Pages/MyBookings/MyBookings";
 import MyListings from "../Pages/MyListings/MyListings";
 import PrivateRoute from "./PrivateRoute";
 import CarDetails from "../Pages/CarDetails/CarDetails";
+import CarNotFound from "../Pages/CarNotFound";
 
 export const router = createBrowserRouter([
   {
@@ -59,12 +60,16 @@ export const router = createBrowserRouter([
       {
         path: "/car-details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/browse-cars/${params.id}`),
+          fetch(`http://localhost:3000/car-details/${params.id}`),
         element: (
           <PrivateRoute>
             <CarDetails></CarDetails>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/car-not-found",
+        Component: CarNotFound,
       },
     ],
   },

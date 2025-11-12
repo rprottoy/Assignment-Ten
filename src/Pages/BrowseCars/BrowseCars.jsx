@@ -1,24 +1,38 @@
 import React, { use } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
+import CarNotFound from "../CarNotFound";
+import CarCard from "../../Components/Common/CarCard";
+import search from "../../Assets/search_icon.svg";
+import { Suspense } from "react";
+import BrowseCarsCard from "../../Components/Common/BrowseCarsCard";
 const browseCarsPromise = fetch("http://localhost:3000/browse-cars").then(
   (res) => res.json()
 );
 
 const BrowseCars = () => {
-  const { user } = use(AuthContext);
   const browseCars = use(browseCarsPromise);
-  const navigate = useNavigate();
 
-  const currency = import.meta.env.VITE_CURRENCY;
+  // search
+  // const [filteredData, setFilteredData] = useState(browseCars);
 
-  const handleViewDetails = () => {
-    if (user) {
-      navigate(`/car-details/${browseCars._id}`);
-    } else {
-      navigate("/login");
-    }
+  // search
+  const handleInputData = (e) => {
+    const searchTerm = e.target.value;
+
+    fetch(`http://localhost:3000/search?search=${searchTerm}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+    // const result = browseCars.filter((f) =>
+    //   f.carName.toLowerCase().includes(searchTerm.trim().toLowerCase())
+    // );
+    // setFilteredData(result);
   };
+
+  // const isEmpty = searchFilter.length === 0;
 
   return (
     <div className="w-full ">
@@ -47,67 +61,40 @@ const BrowseCars = () => {
         </div>
       </div>
 
-      <div className="md:max-w-11/12 lg:max-w-11/12 max-w-11/12 mx-auto mb-15">
-        <div>
-          <h2 className="text-4xl md:text-5xl font-bold font-primary py-15  text-center text-[#253241]">
-            All Our <span className="text-[#D01818] ">Listings</span>
-          </h2>
+      <div className="max-w-11/12   mx-auto mb-15">
+        {/* Search Box */}
+        <div className="flex items-center flex-col mt-10">
+          <div className="flex items-center bg-white px-4  mt-6 max-w-140 w-full h-12 rounded-full shadow">
+            <img className="w-4.5 h-4.5 mr-2" src={search} alt="search icon" />
+            <input
+              className=" w-full h-full outline-none text-gray-500"
+              onChange={handleInputData}
+              placeholder="Search by name"
+              type="search"
+              name="search"
+            />
+          </div>
         </div>
+
         {/* Car Cards */}
-        <div className="md:grid md:grid-cols-4 lg:grid-col-4 ">
-          {browseCars.map((car) => (
-            <div
-              key={car._id}
-              className="overflow-hidden hover:-translate-y-1  transition-all duration-500 cursor-pointer md:w-[320px] w-full h-fit mb-10"
-            >
-              {/* image div */}
-              <div>
-                <img
-                  className="  object-center object-cover transition-transform duration-500 group-hover:scale-105 md:w-[320px] w-full h-[250px]"
-                  src={car.imageUrl}
-                  alt=""
-                />
-              </div>
-              <div className="bg-[#253241] hover:bg-[#D01818]">
-                {/* Name div */}
-                <div className=" ">
-                  <div>
-                    <h3 className="py-3 text text-center text-white font-primary font-semibold">
-                      {car.carName}
-                    </h3>
-                  </div>
-                </div>
-                {/* Details Div */}
-                <div className="text-white py-2 px-4 flex md:flex-col lg:flex-col justify-between font-secondary border-b border-gray-500">
-                  <div>
-                    <p>{car.category}</p>
-                  </div>
-                  <div>
-                    <p>{car.providerName}</p>
-                  </div>
-                </div>
-                {/* Price */}
-                <div className="text-white py-3 text-center font-primary font-semibold">
-                  <div>
-                    <h3>
-                      {currency}
-                      {car.rentPrice}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-              {/* Button  */}
-              <div>
-                <button
-                  onClick={handleViewDetails}
-                  className="btn border-none font-primary text-white rounded-none font-semibold w-full bg-[#D01818] hover:bg-[#222222]"
-                >
-                  VIEW DETAILS
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+
+        {/* {isEmpty ? (
+          <CarNotFound></CarNotFound>
+        ) : ( */}
+        <Suspense fallback={<span>Loading...</span>}>
+          {/* Listings */}
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold font-primary py-15  text-center text-[#253241]">
+              All Our <span className="text-[#D01818] ">Listings</span>
+            </h2>
+          </div>
+          <div className="md:grid md:grid-cols-4 lg:grid-col-4 ">
+            {browseCars.map((car) => (
+              <BrowseCarsCard key={car._id} car={car}></BrowseCarsCard>
+            ))}
+          </div>
+        </Suspense>
+        {/* // )} */}
       </div>
     </div>
   );
