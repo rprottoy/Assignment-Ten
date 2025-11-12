@@ -11,7 +11,7 @@ const CarDetails = () => {
     <div className="max-w-10/12 mx-auto">
       <div className="md:flex mt-30 gap-15 items-center mb-15">
         <img
-          className="w-full md:w-[600px] h-[500px] object-center object-cover"
+          className="w-full md:w-[600px] md:h-[500px] object-center object-cover mb-8 md:mb-0 lg:mb-0"
           src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764"
           alt=""
         />
@@ -22,11 +22,16 @@ const CarDetails = () => {
             <p className="font-bold text-lg font-secondary">
               {currency}75 /Per Day
             </p>
-            <p className="font-secondary ">Location</p>
+            <p className="font-secondary ">Location-</p>
           </div>
           <div className="space-y-4 font-secondary">
-            <p>Provider Name: </p>
-            <p>Provider Email:</p>
+            <p>Provider Name- </p>
+            <p>Provider Email-</p>
+            <div className="mt-10 ">
+              <button className="btn md:px-35 border-none font-primary text-white rounded-none font-semibold w-full bg-[#D01818] hover:bg-[#222222]">
+                BOOK NOW
+              </button>
+            </div>
           </div>
         </div>
       </div>
