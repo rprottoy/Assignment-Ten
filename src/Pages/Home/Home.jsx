@@ -5,9 +5,9 @@ import CarCard from "../../Components/Common/CarCard";
 import WhyFromUs from "../../Components/Common/WhyFromUs";
 import Testimonial from "../../Components/Common/Testimonial";
 
-const featuredCarsPromise = fetch("http://localhost:3000/featured-cars").then(
-  (res) => res.json()
-);
+const featuredCarsPromise = fetch(
+  "https://rent-wheels-server-olive.vercel.app/featured-cars"
+).then((res) => res.json());
 
 const Home = () => {
   return (

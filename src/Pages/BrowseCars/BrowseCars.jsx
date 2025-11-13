@@ -6,9 +6,9 @@ import CarCard from "../../Components/Common/CarCard";
 import search from "../../Assets/search_icon.svg";
 import { Suspense } from "react";
 import BrowseCarsCard from "../../Components/Common/BrowseCarsCard";
-const browseCarsPromise = fetch("http://localhost:3000/browse-cars").then(
-  (res) => res.json()
-);
+const browseCarsPromise = fetch(
+  "https://rent-wheels-server-olive.vercel.app/browse-cars"
+).then((res) => res.json());
 
 const BrowseCars = () => {
   const browseCars = use(browseCarsPromise);
@@ -20,7 +20,9 @@ const BrowseCars = () => {
   const handleInputData = (e) => {
     const searchTerm = e.target.value;
     // console.log(searchTerm);
-    fetch(`http://localhost:3000/search?search=${searchTerm}`)
+    fetch(
+      `https://rent-wheels-server-olive.vercel.app/search?search=${searchTerm}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setCars(data);

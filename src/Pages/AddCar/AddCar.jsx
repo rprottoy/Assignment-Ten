@@ -21,7 +21,7 @@ const AddCar = () => {
       description: e.target.description.value,
       availabilityStatus: "Available",
     };
-    fetch("http://localhost:3000/browseCars", {
+    fetch("https://rent-wheels-server-olive.vercel.app/browseCars", {
       method: "POST",
       headers: {
         "content-type": "application/json",

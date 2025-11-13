@@ -12,7 +12,7 @@ const CarDetails = () => {
   const currency = import.meta.env.VITE_CURRENCY;
 
   const handleBooking = () => {
-    fetch(`http://localhost:3000/myBookings`, {
+    fetch(`https://rent-wheels-server-olive.vercel.app/myBookings`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

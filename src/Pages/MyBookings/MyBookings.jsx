@@ -12,7 +12,9 @@ const MyBookings = () => {
 
   // fetch
   useEffect(() => {
-    fetch(`http://localhost:3000/my-bookings/${user?.email}`)
+    fetch(
+      `https://rent-wheels-server-olive.vercel.app/my-bookings/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setBookings(data);

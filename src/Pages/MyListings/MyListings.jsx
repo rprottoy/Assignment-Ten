@@ -33,7 +33,7 @@ const MyListings = () => {
     };
 
     // sending data to server
-    fetch(`http://localhost:3000/car/${id}`, {
+    fetch(`https://rent-wheels-server-olive.vercel.app/car/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -45,7 +45,9 @@ const MyListings = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-listings?email=${user.email}`)
+    fetch(
+      `https://rent-wheels-server-olive.vercel.app/my-listings?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setListings(data);
@@ -72,7 +74,7 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/browseCars/${id}`, {
+        fetch(`https://rent-wheels-server-olive.vercel.app/browseCars/${id}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
