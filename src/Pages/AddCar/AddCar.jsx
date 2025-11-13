@@ -1,8 +1,10 @@
 import React, { use } from "react";
 import { AuthContext } from "../../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const AddCar = () => {
   const { user } = use(AuthContext);
+  console.log(user);
   // Form
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -13,8 +15,9 @@ const AddCar = () => {
       rentPrice: e.target.rentPrice.value,
       imageUrl: e.target.imageUrl.value,
       location: e.target.location.value,
-      providerName: e.target.providerName.value,
-      providerEmail: e.target.providerEmail.value,
+      providerId: user.uid,
+      providerName: user.displayName,
+      providerEmail: user.email,
       description: e.target.description.value,
     };
     fetch("http://localhost:3000/browseCars", {
@@ -26,8 +29,14 @@ const AddCar = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        Swal.fire({
+          title: "Congratulations!",
+          text: "Your car added to the listing",
+          icon: "success",
+        });
         console.log(data);
       })
+
       .catch((err) => {
         console.log(err);
       });
@@ -94,7 +103,8 @@ const AddCar = () => {
                 // readOnly
                 name="providerName"
                 placeholder="Your/Company Name"
-                required
+                readOnly
+                value={user.displayName}
                 className="px-3 py-2 mt-1 border borderColor rounded-md outline-none"
               />
             </div>
@@ -126,7 +136,8 @@ const AddCar = () => {
               type="text"
               name="providerEmail"
               placeholder="Your/Company Email"
-              required
+              readOnly
+              value={user.email}
               // readOnly
               className="px-3 py-2 mt-1 border borderColor rounded-md outline-none"
             />

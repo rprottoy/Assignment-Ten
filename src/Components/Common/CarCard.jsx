@@ -5,14 +5,15 @@ import { AuthContext } from "../../Context/AuthContext";
 const CarCard = ({ featuredCarsPromise }) => {
   const { user } = use(AuthContext);
   const featuredCars = use(featuredCarsPromise);
+  console.log(featuredCars);
 
   const navigate = useNavigate();
 
   const currency = import.meta.env.VITE_CURRENCY;
 
-  const handleViewDetails = () => {
+  const handleViewDetails = (id) => {
     if (user) {
-      navigate(`/car-details/${featuredCars._id}`);
+      navigate(`/car-details/${id}`);
     } else {
       navigate("/login");
     }
@@ -72,7 +73,7 @@ const CarCard = ({ featuredCarsPromise }) => {
               {/* Button  */}
               <div>
                 <button
-                  onClick={handleViewDetails}
+                  onClick={() => handleViewDetails(car._id)}
                   className="btn border-none font-primary text-white rounded-none font-semibold w-full bg-[#D01818] hover:bg-[#222222]"
                 >
                   VIEW DETAILS

@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link } from "react-router";
 import CarNotFound from "../CarNotFound";
@@ -12,18 +12,19 @@ const browseCarsPromise = fetch("http://localhost:3000/browse-cars").then(
 
 const BrowseCars = () => {
   const browseCars = use(browseCarsPromise);
-
+  const [cars, setCars] = useState(browseCars);
   // search
   // const [filteredData, setFilteredData] = useState(browseCars);
 
   // search
   const handleInputData = (e) => {
     const searchTerm = e.target.value;
-
+    // console.log(searchTerm);
     fetch(`http://localhost:3000/search?search=${searchTerm}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setCars(data);
+        // console.log(data);
       });
 
     // const result = browseCars.filter((f) =>
@@ -89,7 +90,7 @@ const BrowseCars = () => {
             </h2>
           </div>
           <div className="md:grid md:grid-cols-4 lg:grid-col-4 ">
-            {browseCars.map((car) => (
+            {cars.map((car) => (
               <BrowseCarsCard key={car._id} car={car}></BrowseCarsCard>
             ))}
           </div>

@@ -23,14 +23,13 @@ const Login = () => {
         navigate(location.state || "/");
       })
       .catch((error) => {
-        setError(
-          error.Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Password must be at least 6 characters and must contain one Uppercase and one lowercase!",
-            footer: '<a href="#">Why do I have this issue?</a>',
-          })
-        );
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please provide valid credentials or Register!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+        setError(error);
       });
   };
 
@@ -52,11 +51,17 @@ const Login = () => {
               <form onSubmit={handleLogin}>
                 <fieldset className="fieldset">
                   <label className="label font-secondary">Email</label>
-                  <input type="email" className="input" placeholder="Email" />
+                  <input
+                    type="email"
+                    className="input"
+                    name="email"
+                    placeholder="Email"
+                  />
                   <label className="label fon-secondary">Password</label>
                   <input
                     type="password"
                     className="input"
+                    name="password"
                     placeholder="Password"
                   />
                   <div>

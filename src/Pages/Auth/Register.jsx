@@ -50,14 +50,13 @@ const Register = () => {
         });
       })
       .catch((error) => {
-        setError(
-          error.Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Password must be at least 6 characters and must contain one Uppercase and one lowercase!",
-            footer: '<a href="#">Why do I have this issue?</a>',
-          })
-        );
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please Provide valid credentials!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+        setError(error);
       });
   };
 
@@ -85,6 +84,7 @@ const Register = () => {
                   <input
                     type="text"
                     name="name"
+                    required
                     className="input"
                     placeholder="Name"
                   />
@@ -100,6 +100,7 @@ const Register = () => {
                   <label className="label font-secondary">Email</label>
                   <input
                     type="email"
+                    required
                     name="email"
                     className="input"
                     placeholder="Email"

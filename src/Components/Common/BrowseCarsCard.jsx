@@ -29,11 +29,11 @@ const BrowseCarsCard = ({ car }) => {
             alt=""
           />
 
-          {/* {car?.isAvailable && ( */}
-          <p className="absolute top-4 left-4 px-3 py-1 rounded-full text-white bg-[#D01818] font-bold">
-            Available
-          </p>
-          {/* )} */}
+          {car?.isAvailable && (
+            <p className="absolute top-4 left-4 px-3 py-1 rounded-full text-white bg-[#D01818] font-bold font-secondary">
+              Available
+            </p>
+          )}
         </div>
         <div className="bg-[#253241] hover:bg-[#D01818]">
           {/* Name div */}
