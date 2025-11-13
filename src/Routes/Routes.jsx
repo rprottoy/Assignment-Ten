@@ -10,6 +10,7 @@ import MyListings from "../Pages/MyListings/MyListings";
 import PrivateRoute from "./PrivateRoute";
 import CarDetails from "../Pages/CarDetails/CarDetails";
 import CarNotFound from "../Pages/CarNotFound";
+import NotFound from "../Components/Common/404";
 
 export const router = createBrowserRouter([
   {
@@ -72,5 +73,9 @@ export const router = createBrowserRouter([
         Component: CarNotFound,
       },
     ],
+  },
+  {
+    path: "*",
+    Component: NotFound,
   },
 ]);

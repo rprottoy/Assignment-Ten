@@ -1,11 +1,36 @@
-import React from "react";
+import React, { use } from "react";
 import { useLoaderData } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const CarDetails = () => {
   const car = useLoaderData();
-  // console.log(car);
+  const { _id } = car;
+
+  const { user } = use(AuthContext);
 
   const currency = import.meta.env.VITE_CURRENCY;
+
+  const handleBooking = () => {
+    fetch(`http://localhost:3000/myBookings`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ ...car, booked_by: user.email }),
+    })
+      .then((res) => res.json())
+      .then();
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Car has been booked, thank you",
+      showConfirmButton: false,
+      timer: 1500,
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
 
   return (
     <div className="max-w-10/12 mx-auto">
@@ -39,7 +64,11 @@ const CarDetails = () => {
             <p>{car.providerEmail}</p>
             <p className="font-secondary ">Location: {car.location}</p>
             <div className="mt-10 ">
-              <button className="btn md:px-35 border-none font-primary text-white rounded-none font-semibold w-full bg-[#D01818] hover:bg-[#222222]">
+              <button
+                onClick={handleBooking}
+                className="btn md:px-35 border-none font-primary text-white rounded-none font-semibold w-full bg-[#D01818] hover:bg-[#222222] disabled:cursor-not-allowed disabled:bg-gray-400"
+                disabled={car?.availabilityStatus === "Booked"}
+              >
                 BOOK NOW
               </button>
             </div>

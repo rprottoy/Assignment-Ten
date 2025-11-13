@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const AddCar = () => {
   const { user } = use(AuthContext);
-  console.log(user);
+
   // Form
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +19,7 @@ const AddCar = () => {
       providerName: user.displayName,
       providerEmail: user.email,
       description: e.target.description.value,
+      availabilityStatus: "Available",
     };
     fetch("http://localhost:3000/browseCars", {
       method: "POST",
@@ -28,13 +29,13 @@ const AddCar = () => {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         Swal.fire({
           title: "Congratulations!",
           text: "Your car added to the listing",
           icon: "success",
         });
-        console.log(data);
+        // console.log(data);
       })
 
       .catch((err) => {
@@ -45,10 +46,10 @@ const AddCar = () => {
     <div className="mt-30  md:max-w-10/12 w-11/12 mx-auto mb-15">
       <div>
         <h1 className="text-3xl font-semibold font-primary text-[#253241] mb-2">
-          My Bookings
+          Add Your Car to The Listing
         </h1>
         <p className="font-secondary text-[#253241]">
-          fill the details to list a new car for booking, including pricing,
+          fill the details to list a new car for listing, including pricing,
           availability, and other specifications.
         </p>
       </div>

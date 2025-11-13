@@ -14,7 +14,7 @@ const BrowseCars = () => {
   const browseCars = use(browseCarsPromise);
   const [cars, setCars] = useState(browseCars);
   // search
-  // const [filteredData, setFilteredData] = useState(browseCars);
+  const [filteredData, setFilteredData] = useState(browseCars);
 
   // search
   const handleInputData = (e) => {
@@ -24,6 +24,7 @@ const BrowseCars = () => {
       .then((res) => res.json())
       .then((data) => {
         setCars(data);
+        setFilteredData(data);
         // console.log(data);
       });
 
@@ -33,7 +34,7 @@ const BrowseCars = () => {
     // setFilteredData(result);
   };
 
-  // const isEmpty = searchFilter.length === 0;
+  const isEmpty = filteredData.length === 0;
 
   return (
     <div className="w-full ">
@@ -79,23 +80,23 @@ const BrowseCars = () => {
 
         {/* Car Cards */}
 
-        {/* {isEmpty ? (
+        {isEmpty ? (
           <CarNotFound></CarNotFound>
-        ) : ( */}
-        <Suspense fallback={<span>Loading...</span>}>
-          {/* Listings */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold font-primary py-15  text-center text-[#253241]">
-              All Our <span className="text-[#D01818] ">Listings</span>
-            </h2>
-          </div>
-          <div className="md:grid md:grid-cols-4 lg:grid-col-4 ">
-            {cars.map((car) => (
-              <BrowseCarsCard key={car._id} car={car}></BrowseCarsCard>
-            ))}
-          </div>
-        </Suspense>
-        {/* // )} */}
+        ) : (
+          <Suspense fallback={<span>Loading...</span>}>
+            {/* Listings */}
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold font-primary py-15  text-center text-[#253241]">
+                All Our <span className="text-[#D01818] ">Listings</span>
+              </h2>
+            </div>
+            <div className="md:grid md:grid-cols-4 lg:grid-col-4 ">
+              {cars.map((car) => (
+                <BrowseCarsCard key={car._id} car={car}></BrowseCarsCard>
+              ))}
+            </div>
+          </Suspense>
+        )}
       </div>
     </div>
   );

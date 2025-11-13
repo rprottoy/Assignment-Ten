@@ -5,7 +5,6 @@ import { AuthContext } from "../../Context/AuthContext";
 const CarCard = ({ featuredCarsPromise }) => {
   const { user } = use(AuthContext);
   const featuredCars = use(featuredCarsPromise);
-  console.log(featuredCars);
 
   const navigate = useNavigate();
 
@@ -36,11 +35,15 @@ const CarCard = ({ featuredCarsPromise }) => {
                   alt="Car Image"
                 />
 
-                {/* {car?.isAvailable && ( */}
-                <p className="absolute top-4 left-4 px-3 py-1 rounded-full text-white bg-[#D01818] font-bold">
-                  Available
-                </p>
-                {/* )} */}
+                {car?.availabilityStatus === "Available" ? (
+                  <p className="absolute top-4 left-4 px-3 py-1 rounded-full text-white bg-[#003566] font-bold font-secondary">
+                    Available
+                  </p>
+                ) : (
+                  <p className="absolute top-4 left-4 px-3 py-1 rounded-full text-white bg-[#D01818] font-bold font-secondary">
+                    Booked
+                  </p>
+                )}
               </div>
               <div className="bg-[#253241] hover:bg-[#D01818]">
                 {/* Name div */}
