@@ -113,6 +113,7 @@ const Navbar = () => {
                       LOG OUT
                     </button>
                   </li>
+                  <li></li>
                 </ul>
               </div>
             </div>

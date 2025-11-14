@@ -4,9 +4,14 @@ import FeaturedCars from "../../Components/Common/FeaturedCars";
 import CarCard from "../../Components/Common/CarCard";
 import WhyFromUs from "../../Components/Common/WhyFromUs";
 import Testimonial from "../../Components/Common/Testimonial";
+import TopCars from "../../Components/Common/TopCars";
 
 const featuredCarsPromise = fetch(
   "https://rent-wheels-server-olive.vercel.app/featured-cars"
+).then((res) => res.json());
+
+const topCarsPromise = fetch(
+  "https://rent-wheels-server-olive.vercel.app/top-rated"
 ).then((res) => res.json());
 
 const Home = () => {
@@ -17,6 +22,7 @@ const Home = () => {
       <FeaturedCars></FeaturedCars>
       <CarCard featuredCarsPromise={featuredCarsPromise}></CarCard>
       <Testimonial></Testimonial>
+      <TopCars topCarsPromise={topCarsPromise}></TopCars>
     </>
   );
 };
