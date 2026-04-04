@@ -26,7 +26,7 @@ const MyBookings = () => {
       });
   }, []);
   return (
-    <div className="mt-30 px-6 md:px-16 lg:px-24  text-sm md:max-w-10/12 mx-auto">
+    <div className="mt-30 px-6 md:px-16 lg:px-24  text-sm md:max-w-10/12 mx-auto my-10">
       <h1 className="text-3xl font-semibold font-primary text-[#253241] mb-2">
         My Bookings
       </h1>

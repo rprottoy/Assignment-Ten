@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import CarDetails from "../Pages/CarDetails/CarDetails";
 import CarNotFound from "../Pages/CarNotFound";
 import NotFound from "../Components/Common/404";
+import LoaderPage from "../Components/LoaderPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
         index: true,
         path: "/",
         Component: Home,
+        hydrateFallbackElement: <LoaderPage></LoaderPage>,
       },
       {
         path: "/browseCars",

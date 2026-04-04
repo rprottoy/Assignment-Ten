@@ -11,6 +11,7 @@ const browseCarsPromise = fetch(
 ).then((res) => res.json());
 
 const BrowseCars = () => {
+  const [loading, setLoading] = useState(true);
   const browseCars = use(browseCarsPromise);
   const [cars, setCars] = useState(browseCars);
   // search
@@ -25,10 +26,15 @@ const BrowseCars = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
         setCars(data);
         setFilteredData(data);
         // console.log(data);
       });
+
+    if (loading) {
+      <span className="loading loading-ring loading-xl"></span>;
+    }
 
     // const result = browseCars.filter((f) =>
     //   f.carName.toLowerCase().includes(searchTerm.trim().toLowerCase())

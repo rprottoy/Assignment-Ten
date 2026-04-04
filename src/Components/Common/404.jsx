@@ -11,7 +11,7 @@ const NotFound = () => {
         </h2>
       </div>
       <p className="mb-10 font-secondary text-[#253241] text-xl">
-        The page you are looking for is not valid.
+        The page you are looking for is not available.
       </p>
       <Link to="/">
         <button className="px-10 py-3  bg-[#D01818] text-white font-semibold border-0 hover:bg-[#253241] text-center rounded-none">
